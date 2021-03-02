@@ -2,36 +2,75 @@
 
 You can use the [editor on GitHub](https://github.com/cyc001/x/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<!DOCTYPE html>
+<!--
+ *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
+ *
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree.
+-->
+<html>
+<head>
 
-### Markdown
+    <meta charset="utf-8">
+    <meta name="description" content="WebRTC code samples">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+    <meta itemprop="description" content="Client-side WebRTC code samples">
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+    <meta itemprop="name" content="WebRTC code samples">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta id="theme-color" name="theme-color" content="#ffffff">
 
-```markdown
-Syntax highlighted code block
+    <base target="_blank">
 
-# Header 1
-## Header 2
-### Header 3
+    <title>MediaStream Recording</title>
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+    <link rel="stylesheet" href="css/main.css">
 
-**Bold** and _Italic_ and `Code` text
+</head>
 
-[Link](url) and ![Image](src)
-```
+<body>
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+<div id="container">
+<input type='file' id='file'/>
+    <h1><a href="//webrtc.github.io/samples/" title="WebRTC samples homepage">WebRTC samples</a>
+        <span>MediaRecorder</span></h1>
 
-### Jekyll Themes
+    <p>For more information see the MediaStream Recording API <a
+            href="http://w3c.github.io/mediacapture-record/MediaRecorder.html"
+            title="W3C MediaStream Recording API Editor's Draft">Editor's&nbsp;Draft</a>.</p>
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/cyc001/x/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+    <video id="gum" playsinline autoplay muted></video>
+    <video id="recorded" playsinline loop></video>
 
-### Support or Contact
+    <div>
+        <button id="start">Start camera</button>
+        <button id="record" disabled>Start Recording</button>
+        <button id="play" disabled>Play</button>
+        <button id="download" disabled>Download</button>
+		
+		  <button id="play_blob" >play_blob</button>
+    </div>
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+    <div>
+        <h4>Media Stream Constraints options</h4>
+        <p>Echo cancellation: <input type="checkbox" id="echoCancellation"></p>
+    </div>
+
+    <div>
+        <span id="errorMsg"></span>
+    </div>
+
+
+
+</div>
+
+<!-- include adapter for srcObject shim -->
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script src="js/main.js" async></script>
+<script src="js/file.js" async></script>
+<script src="js/rec.js" async></script>
+</body>
+</html>
