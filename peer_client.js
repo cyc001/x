@@ -15,7 +15,7 @@ function init_peer() {
     peer.on('call', function (call) {
         // Answer the call, providing our mediaStream
         db_msg('a', "rece call");
-        call.answer(); //cam_stream_0
+        call.answer(cam_stream_0); //cam_stream_0
         db_msg('a', "answer");
         call.on('stream', function (stream) {
             //console.log('received remote stream');
