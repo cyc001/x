@@ -20,9 +20,13 @@ function init_peer() {
         call.on('stream', function (stream) {
             //console.log('received remote stream');
             // const video = document.querySelector('video');
-            db_msg('a', "received stream");
+            if (!stream) {
+                db_msg('a', "received stream0");
+                return;
+            }
+            db_msg('a', "received stream01");
             rv0.srcObject = stream;
-            cam_stream_0 = stream;
+            // cam_stream_0 = stream;
         });
         call.on('close', function () {
             console.log('received remote stream');
