@@ -20,9 +20,9 @@ window.onload = function () {
     var greeter = new Greeter(el);
     greeter.start();
     init_vars();
+    db_msg('a', "begin");
     init_peer();
     //ws = new WS();
-    db_msg('a', "begin");
     // var bb: HTMLButtonElement = document.querySelector('button#start');
     // bb.addEventListener('click', () => cam_init());
     //
