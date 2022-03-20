@@ -14,11 +14,12 @@ function init_peer() {
     });
     peer.on('call', function (call) {
         // Answer the call, providing our mediaStream
+        db_msg('a', "rece call");
         call.answer(); //cam_stream_0
         call.on('stream', function (stream) {
             //console.log('received remote stream');
             // const video = document.querySelector('video');
-            db_msg('a', "received remote stream");
+            db_msg('a', "received stream");
             rv0.srcObject = stream;
             cam_stream_0 = stream;
         });
