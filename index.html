@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="WebRTC code samples" />
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1" />
+    <title>TypeScript HTML App</title>
+    <link rel="stylesheet" href="app.css" type="text/css" />
+
+    <script src="peerjs.min.js"></script>
+    <script src="vars.js"></script>
+    <script src="app.js"></script>
+    <script src="get_media.js"></script>
+    <script src="record.js"></script>
+    <script src="play_blob.js"></script>
+    <script src="peer_client.js"></script>
+    <script src="ws_client.js"></script>
+
+</head>
+<body>
+    <h1>TypeScript HTML App0</h1>
+
+    <div>
+        <button id="start">Start camera</button>
+        <button id="record" disabled>Start Recording</button>
+        <button id="play" disabled>Play</button>
+    </div>
+
+    <div>
+        Recording format: <select id="codecPreferences" disabled></select>
+    </div>
+    <div>
+        <h4>Media Stream Constraints options</h4>
+        <p>Echo cancellation: <input type="checkbox" id="echoCancellation"></p>
+    </div>
+    <div id="content"></div>
+
+    <video id="gum" playsinline autoplay muted src="fragment-2.mp4"></video>
+
+
+    <video id="rv_0" src="fragment-2.mp4" muted autoplay playsinline></video>
+    <video id="rv_1" src="fragment-2.mp4" muted autoplay playsinline></video>
+    <video id="rv_2" src="fragment-2.mp4" muted playsinline controls></video>
+
+
+    <div>
+        <button id="con_0">con0</button>
+        <button id="con_1">con1</button>
+        <button id="con_2">con2</button>
+    </div>
+
+    <textarea id="my_id">my_id</textarea>
+    <textarea id="r0_id">r0_id</textarea>
+    <textarea id="r1_id">r1_id</textarea>
+    <textarea id="r2_id">r2_id</textarea>
+    <textarea id="debug">debug</textarea>
+
+    <div id="video_box">
+        <video id="v_rec_0" src="fragment-0.mp4" webkit-playsinline="true" playsinline="true" x-webkit-airplay="allow" x5-video-player-type="h5" x5-video-player-fullscreen="true" x5-video-orientation="portraint" style="object-fit:fill"></video>
+        <video id="v_rec_1" src="fragment-1.mp4" webkit-playsinline="true" playsinline="true" x-webkit-airplay="allow" x5-video-player-type="h5" x5-video-player-fullscreen="true" x5-video-orientation="portraint" style="object-fit:fill;"></video>
+    </div>
+
+
+
+
+
+    <div>
+        <span id="errorMsg">123</span>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+span {
+    font-style: italic;
+}
+
+
+/*视频*/
+#video_box {
+    position: fixed;
+    left: 120px;
+    top: 320px;
+    width: 5%;
+    height: 5%;
+    overflow: hidden;
+}
+
+#video_box video {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        height: 100%; /*object-fit:fill;*/
+        position: absolute;
+        left: 0;
+        top: 0;
+        visibility: hidden;
+    }
+
+button {
+    margin: 0 3px 10px 0;
+    padding-left: 2px;
+    padding-right: 2px;
+    width: 99px;
+}
+
+button:last-of-type {
+        margin: 0;
+    }
+
+p.borderBelow {
+    margin: 0 0 20px 0;
+    padding: 0 0 20px 0;
+}
