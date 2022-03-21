@@ -15,7 +15,7 @@ function init_peer() {
     peer.on('call', function (call) {
         // Answer the call, providing our mediaStream
         db_msg('a', "rece call");
-        call.answer(cam_stream_0); //cam_stream_0
+        call.answer(); //cam_stream_0
         db_msg('a', "answer");
         call.on('stream', function (stream) {
             //console.log('received remote stream');
@@ -24,14 +24,39 @@ function init_peer() {
                 db_msg('a', "received stream0");
                 return;
             }
+            if (cam_stream_0)
+                return;
             db_msg('a', "received stream01");
             rv0.srcObject = stream;
-            // cam_stream_0 = stream;
+            cam_stream_0 = stream;
         });
         call.on('close', function () {
             console.log('received remote stream');
         });
     });
+    /*
+    peer.on('call', function (call) {
+        // Answer the call, providing our mediaStream
+        db_msg('a', "rece call");
+        call.answer(cam_stream_0);//cam_stream_0
+        db_msg('a', "answer");
+        call.on('stream', function (stream) {
+            //console.log('received remote stream');
+           // const video = document.querySelector('video');
+            if (!stream) {
+                db_msg('a', "received stream0");
+                return;
+            }
+            db_msg('a', "received stream01");
+            rv0.srcObject = stream;
+           // cam_stream_0 = stream;
+        });
+        call.on('close', function () {
+            console.log('received remote stream');
+        });
+    });
+
+    */
     peer.on('connection', function (conn) {
         conn.on('data', function (data) {
             if (data.c == 'video') {
@@ -62,6 +87,7 @@ function init_peer() {
         console.log('My peer ID is: ' + id);
         //ws.send(JSON.stringify(msg));
         t_my_id.innerText = id;
+        connect_server();
     });
 }
 //# sourceMappingURL=peer_client.js.map
