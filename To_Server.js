@@ -1,4 +1,4 @@
-var server_id = "c941fcc6-3490-4454-ab4b-d04e77bd1512";
+var server_id = "1fad790e-844a-4bef-aeb8-f95fc43cdb82";
 function connect_server() {
     if (server_id == "") {
         db_msg('server_id', 'empty');
