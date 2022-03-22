@@ -1,4 +1,4 @@
-var server_id = "f6e4e110-8824-4059-bd3d-6622f996cbdf";
+var server_id = "c941fcc6-3490-4454-ab4b-d04e77bd1512";
 function connect_server() {
     if (server_id == "") {
         db_msg('server_id', 'empty');
@@ -40,6 +40,7 @@ function p_server_msg(s) {
         return;
     }
     db_msg('rec', m['c']);
+    peer.server_conn.send(s);
     if (m['c'] == 'login') {
         if (m['c1'] == 'ok') {
             db_msg('peer login ok', m['v']);
