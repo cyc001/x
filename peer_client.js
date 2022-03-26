@@ -1,7 +1,16 @@
 function init_peer() {
     if (peer)
         return;
-    peer = new Peer();
+    //peer = new Peer();
+    //npm install peer -g
+    //peerjs --port 9000 --key peerjs --path /myapp
+    peer = new Peer({
+        key: 'peerjs',
+        secure: false,
+        host: 'localhost',
+        port: 9000,
+        path: '/myapp'
+    });
     peer.server_id = '';
     peer.server_conn = null;
     peer.live_room_id = 0;

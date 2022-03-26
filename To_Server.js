@@ -1,9 +1,9 @@
-var server_id = "ce66c898-18f8-4534-8cf1-df518a6e99c2";
 function connect_server() {
     if (server_id == "") {
         db_msg('server_id', 'empty');
         return;
     }
+    db_msg('to server', 'begin conn');
     peer.server_id = server_id;
     t_server_id.value = peer.server_id;
     peer.server_conn = peer.connect(peer.server_id);

@@ -31,8 +31,11 @@ var WS = /** @class */ (function () {
         });
     }
     WS.prototype.send = function (s) {
-        if (this.socket != null)
-            this.socket.send(s);
+        if (this.socket != null) {
+            if (this.socket.readyState == 1) {
+                this.socket.send(s);
+            }
+        }
     };
     return WS;
 }());
