@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="app.css" type="text/css" />
 
     <script src="misc.js"></script>
-    <script src="peerjs.min.js"></script>
+    <script src="peerjs.js"></script>
     <script src="vars.js"></script>
     <script src="app.js"></script>
     <script src="get_media.js"></script>
@@ -23,11 +23,15 @@
 </head>
 <body>
     <h1>TypeScript HTML App02</h1>
+    <video id="test_v0" autoplay loop></video>
+    <img id="test_img" />
 
+    <!--- src="http://127.0.0.1/1.jpg" src="http://127.0.0.1/3.mp4"-->
     <div>
         <button id="start">Start camera</button>
         <button id="record" disabled>Start Recording</button>
         <button id="play" disabled>Play</button>
+        <button id="ws_stream" disabled>get ws stream</button>
     </div>
 
     <div>
@@ -44,7 +48,7 @@
 
     <video id="rv_0" src="fragment-2.mp4" muted autoplay playsinline></video>
     <video id="rv_1" src="fragment-2.mp4" muted autoplay playsinline></video>
-    <video id="rv_2" src="fragment-2.mp4" muted playsinline controls></video>
+    <video id="rv_2" muted playsinline controls></video>
 
 
     <div>

@@ -1,25 +1,30 @@
-var ws;
-var debug;
-var codecPreferences;
-var errorMsgElement;
-var recordButton;
-var playButton;
-var gumVideo;
-var cam_stream_0 = null;
+let ws;
+let con_map;
+let ws_tasks;
+let host_dir;
+let debug;
+let codecPreferences;
+let errorMsgElement;
+let recordButton;
+let playButton;
+let gumVideo;
+let cam_stream_0 = null;
 //let cam_stream_1: any = null;
-var v0;
-var v1;
-var rv0;
-var rv1;
-var rv2;
-var peer;
-var t_my_id;
-var t_server_id;
-var r0_id;
-var r1_id;
-var r2_id;
-var bt_id = 0;
+let v0;
+let v1;
+let rv0;
+let rv1;
+let rv2;
+let peer;
+let t_my_id;
+let t_server_id;
+let r0_id;
+let r1_id;
+let r2_id;
+let bt_id = 0;
 function init_vars() {
+    con_map = new Map();
+    ws_tasks = [];
     codecPreferences = document.querySelector('#codecPreferences');
     errorMsgElement = document.querySelector('span#errorMsg');
     v0 = document.querySelector('video#v_rec_0');
@@ -35,17 +40,23 @@ function init_vars() {
     r0_id = document.getElementById("r0_id");
     r1_id = document.getElementById("r1_id");
     r2_id = document.getElementById("r2_id");
-    document.querySelector('button#start').addEventListener('click', function () { return cam_init(); });
+    document.querySelector('button#start').addEventListener('click', () => cam_init());
     debug = document.getElementById("debug");
-    document.querySelector('button#con_0').addEventListener('click', function () {
+    document.querySelector('button#con_0').addEventListener('click', () => {
         bt_id = 0;
-        var call = peer.call(r0_id.value, cam_stream_0);
-        call.on('stream', function (remoteStream) {
+        const call = peer.call(r0_id.value, cam_stream_0);
+        call.on('stream', (remoteStream) => {
             // Show stream in some <video> element.
             db_msg('org', "received stream0");
         });
     });
-    recordButton.addEventListener('click', function () {
+    document.querySelector('button#con_2').addEventListener('click', () => {
+        //  let msg: Object = { "c": "file", "c1": "3.mp4" };
+        //  ws.send(JSON.stringify(msg));
+        //fetchAB('http://localhost/3.mp4', process_blob);
+        fetchAB('http://localhost/2.jpg', process_blob);
+    });
+    recordButton.addEventListener('click', () => {
         if (recordButton.textContent === 'Start Recording') {
             startRecording();
         }
@@ -53,11 +64,43 @@ function init_vars() {
             stopRecording();
         }
     });
-    playButton.addEventListener('click', function () {
+    playButton.addEventListener('click', () => {
         play_2s();
+    });
+    setInterval(send_ws_info_to_peer, 100);
+}
+function send_ws_info_to_peer() {
+    ws_tasks.forEach((tt, i) => {
+        var t = JSON.parse(tt);
+        if (con_map.has(t.web_peer_id)) {
+            con_map.get(t.web_peer_id).send(tt);
+            // con_map.delete(t.web_peer_id);
+            ws_tasks.splice(i, 1);
+        }
     });
 }
 function db_msg(from, s) {
     debug.value += from + ": " + s + "\r\n"; //.innerText
+}
+function fetchAB(url, cb) {
+    var xhr = new XMLHttpRequest;
+    xhr.open('get', url);
+    xhr.responseType = 'blob'; // 'arraybuffer';
+    xhr.onload = function () {
+        cb(xhr.response);
+        // xhr.response
+    };
+    xhr.send();
+}
+function process_blob(b) {
+    //   (document.getElementById("test_img") as HTMLImageElement).src = window.URL.createObjectURL(b);
+    // rv2.src = window.URL.createObjectURL( b);
+    //  ws.send_obj({ 'c': 'filex', 'stream': b });
+    var reader = new FileReader();
+    reader.onload = function (event) {
+        var content = reader.result; //内容就在这里
+        ws.send_obj({ 'c': 'filex', 'stream': content });
+    };
+    reader.readAsText(b);
 }
 //# sourceMappingURL=vars.js.map

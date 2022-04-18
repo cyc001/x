@@ -5,8 +5,8 @@ function handleSuccess(stream) {
     // window.stream = stream;
     cam_stream_0 = stream;
     gumVideo.srcObject = stream;
-    getSupportedMimeTypes().forEach(function (mimeType) {
-        var option = document.createElement('option');
+    getSupportedMimeTypes().forEach(mimeType => {
+        const option = document.createElement('option');
         option.value = mimeType;
         option.innerText = option.value;
         codecPreferences.appendChild(option);
@@ -18,23 +18,23 @@ function handleError(error) {
     gumVideo.srcObject = null;
 }
 function getSupportedMimeTypes() {
-    var possibleTypes = [
+    const possibleTypes = [
         'video/webm;codecs=vp9,opus',
         'video/webm;codecs=vp8,opus',
         'video/webm;codecs=h264,opus',
         'video/mp4;codecs=h264,aac',
     ];
-    return possibleTypes.filter(function (mimeType) {
+    return possibleTypes.filter(mimeType => {
         return MediaRecorder.isTypeSupported(mimeType);
     });
 }
 function cam_init() {
-    var hasEchoCancellation = document.querySelector('#echoCancellation').checked;
-    var constraints = {
+    const hasEchoCancellation = document.querySelector('#echoCancellation').checked;
+    const constraints = {
         audio: true,
         video: true
     };
-    var constraints1 = {
+    const constraints1 = {
         audio: {
             echoCancellation: { exact: hasEchoCancellation }
         },
@@ -44,6 +44,6 @@ function cam_init() {
     };
     document.querySelector('button#start').disabled = true;
     //需要在HTTPS/LOCALHOST下才可使用getUserMedia
-    navigator.mediaDevices.getUserMedia(constraints).then(function (ss) { return handleSuccess(ss); }).catch(function (err) { return handleError(err); });
+    navigator.mediaDevices.getUserMedia(constraints).then((ss) => handleSuccess(ss)).catch((err) => handleError(err));
 }
 //# sourceMappingURL=get_media.js.map

@@ -1,8 +1,8 @@
-var play_id = 0;
-var usr_obj_buf = [];
+let play_id = 0;
+let usr_obj_buf = [];
 function play_2s() {
     play_id = 0;
-    var mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
+    const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
     if (usr_obj_buf.length == 0) {
         for (var i = 0; i < rec_arr.length; i++) {
             usr_obj_buf.push(window.URL.createObjectURL(rec_arr[i]));
@@ -17,7 +17,7 @@ function play_2s() {
     v1.srcObject = null;
     v1.src = usr_obj_buf[1];
     v1.style.visibility = "";
-    v0.onended = function (event) {
+    v0.onended = (event) => {
         play_id++;
         if (play_id < rec_arr.length) {
             v1.style.visibility = "visible";
@@ -29,7 +29,7 @@ function play_2s() {
         }
         errorMsgElement.innerText = play_id.toString();
     };
-    v1.onended = function (event) {
+    v1.onended = (event) => {
         play_id++;
         if (play_id < rec_arr.length) {
             v0.style.visibility = "visible";

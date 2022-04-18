@@ -1,27 +1,40 @@
-function init_peer() {
-    if (peer)
-        return;
-    //peer = new Peer();
-    //npm install peer -g
-    //peerjs --port 9000 --key peerjs --path /myapp
-    peer = new Peer({
-        key: 'peerjs',
-        secure: false,
-        host: 'localhost',
-        port: 9000,
-        path: '/myapp'
-    });
-    peer.server_id = '';
-    peer.server_conn = null;
-    peer.live_room_id = 0;
-    peer.on('close', function () {
+let peer_count = 0;
+function init_peer(_srv_id, _peer_id = '') {
+    let pr;
+    switch (_srv_id) {
+        case 1:
+            //npm install peer -g
+            //peerjs --port 9000 --key peerjs --path /myapp
+            if (_peer_id == '') {
+                pr = new Peer({
+                    key: 'peerjs',
+                    secure: false,
+                    host: '127.0.0.1',
+                    port: 9000,
+                    path: '/myapp'
+                });
+                break;
+            }
+            pr = new Peer({
+                key: 'peerjs',
+                secure: false,
+                host: '192.168.0.105',
+                port: 9000,
+                path: '/myapp'
+            });
+            break;
+        default:
+            pr = new Peer();
+            break;
+    }
+    pr.on('close', () => {
         peer.id = '';
     });
-    peer.on('disconnected', function () {
+    pr.on('disconnected', () => {
         peer.id = '';
         peer.reconnect();
     });
-    peer.on('call', function (call) {
+    pr.on('call', (call) => {
         // Answer the call, providing our mediaStream
         db_msg('a', "rece call");
         call.answer(); //cam_stream_0
@@ -44,7 +57,7 @@ function init_peer() {
         });
     });
     /*
-    peer.on('call', function (call) {
+    pr.on('call', function (call) {
         // Answer the call, providing our mediaStream
         db_msg('a', "rece call");
         call.answer(cam_stream_0);//cam_stream_0
@@ -66,8 +79,16 @@ function init_peer() {
     });
 
     */
-    peer.on('connection', function (conn) {
-        conn.on('data', function (data) {
+    pr.on('connection', function (conn) {
+        con_map.set(conn.peer, conn);
+        conn.on('data', (data) => {
+            if (p_as_web(data, conn)) {
+                return;
+            }
+            if (data.c == 'close') {
+                con_map.delete(conn.peer);
+                conn.close();
+            }
             if (data.c == 'video') {
                 if (data.c1 == 'b') {
                     /*
@@ -84,19 +105,21 @@ function init_peer() {
                 }
             }
         });
-        conn.on('close', function () {
+        conn.on('close', () => {
             //  msg = { "c": "main_id", "v": id };
         });
-        conn.on('error', function (err) {
+        conn.on('error', (err) => {
             // msg = { "c": "main_id", "v": id };
         });
     });
-    peer.on('open', function (id) {
-        var msg = { "c": "main_id", "v": id };
+    pr.on('open', function (id) {
+        peer_count++;
         console.log('My peer ID is: ' + id);
-        //ws.send(JSON.stringify(msg));
-        t_my_id.innerText = id;
-        connect_server();
+        t_my_id.innerText = id + ':' + peer_count.toString();
+        //connect_server();
+        pr.server_comm = connect_other(pr, server_id, 'to server');
+        ws.send_obj({ "c": "main_id", "v": id });
     });
+    return pr;
 }
 //# sourceMappingURL=peer_client.js.map

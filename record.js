@@ -1,8 +1,8 @@
-var mediaRecorder;
-var recordedBlobs;
-var en_record = 0;
-var record_id = 0;
-var rec_arr = [];
+let mediaRecorder;
+let recordedBlobs;
+let en_record = 0;
+let record_id = 0;
+let rec_arr = [];
 function handleDataAvailable(event) {
     record_id++; //record_id==2 && 
     if (record_id > 10)
@@ -15,21 +15,21 @@ function handleDataAvailable(event) {
 }
 function startRecording() {
     recordedBlobs = [];
-    var mimeType = codecPreferences.options[codecPreferences.selectedIndex].value;
-    var options = { mimeType: mimeType };
+    const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value;
+    const options = { mimeType };
     try {
         mediaRecorder = new MediaRecorder(cam_stream_0, options);
     }
     catch (e) {
         console.error('Exception while creating MediaRecorder:', e);
-        errorMsgElement.innerHTML = "Exception while creating MediaRecorder: " + JSON.stringify(e);
+        errorMsgElement.innerHTML = `Exception while creating MediaRecorder: ${JSON.stringify(e)}`;
         return;
     }
     console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
     recordButton.textContent = 'Stop Recording';
     playButton.disabled = true;
     codecPreferences.disabled = true;
-    mediaRecorder.onstop = function (event) {
+    mediaRecorder.onstop = (event) => {
         if (en_record != 0) {
             console.log('Recorder stopped: ', event);
             console.log('Recorded Blobs: ', recordedBlobs);
