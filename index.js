@@ -420,6 +420,7 @@ class _user_to_server extends _user_para {
                     this.xid = d.xid;
                     this.server = cn;
                     $("#is_online").css("color", "green").text("Online");
+                    $("#my_id").text(this.peer_id + '\r\n' + this.xid);
                     document.title = from + ' ' + this.xid;
                     if (d.c1 == 'new') {
                         window.localStorage.setItem('room_xid', this.xid.toString());
@@ -480,6 +481,7 @@ class _user_peer extends _user_to_server {
             $("#is_online").css("color", "green").text("Online_0");
             //db_msg('My peer ID is ' + pr.id);
             $("#my_id").text(_pr.id);
+            this.peer_id = _pr.id;
             this.server = this.connect_to_server(svr_id);
             // this.rooms = new Peer_To_Room('user', 'rooms', this.pr, this.rooms_server_id);
         };
