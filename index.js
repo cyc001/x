@@ -300,7 +300,7 @@ var svr_id = 'A12345-12345-22345A';
 var cons = new Map();
 class _Peer_ {
     constructor() {
-        this.peer_mode = 'local'; //'';// 'local';
+        this.peer_mode = ''; // 'local'//'';// 'local';
         this.local_peer_js = {
             host: '192.168.0.100',
             key: 'peerjs',
