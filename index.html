@@ -1,34 +1,86 @@
-<!DOCTYPE html>
-<html lang="en-us">
+﻿<!DOCTYPE html>
+
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="renderer" content="webkit">
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<title>舞动青春</title>
-<link rel="stylesheet" href="./css/index.css?rev=@hash">
+    <meta charset="UTF-8" />
+
+    <title>Users App</title>
+    <link rel="stylesheet" href="app.css" type="text/css" />
+    <script src="../common/index_dist.js"></script>
+
+
+    <script src="index.js" charset="UTF-8"></script>
+
+    <!--
+    <script src="../../c/_peer.js"></script>
+    <script src="../../c/alg.js"></script>
+    <script src="../../c/mse_alg.js"></script>
+
+    <script src="user_app.js"></script>
+    <script src="user_peer.js"></script>
+    <script src="user_to_server.js"></script>
+    <script src="user_to_room.js"></script>
+    <script src="user_play.js"></script>
+    <script src="user_ui.js"></script>
+        -->
 </head>
 <body>
-
-    <div class="shake-top">
-        <span>找音乐</span>
+    <div>
+        <button class="btn btn-primary btn-lg" id="bt_start_watch">开始观看</button>
+        <input type="number" id="room_xid" value="0" />
+        <button class="btn btn-primary btn-lg" id="bt_stop_watch">停止观看</button>
+        <br /> <br />
+        <button class="btn btn-primary btn-lg" id="bt_send_msg">发送消息</button>
+        <input type="text" id="txt_send_msg" />
+        <br /><br />
+        <label>Received Msg:</label>     <br /><br />
+        <textarea id="txt_receive_msg" style="border: none; outline: none; background-color: transparent; resize: none; overflow-y: scroll;scrollbar-width:none"></textarea>
     </div>
+    <main class="container mt-5">
+        <div class="jumbotron">
+            <h3 class="display-6">Host App</h3>
+            <p class="lead" id="is_online" style="float:left; bottom:0;color:red">&nbsp;&nbsp;Offline</p>
+            <p class="lead">&nbsp;&nbsp; 出现online即为连线。</p>
+            <hr class="my-4">
+            <p>点击下面的按钮了解更多信息。</p>
+            <p class="lead">
 
-    <div class="shake-bottom">
-        <span>摇一摇</span>
-    </div>
+                <button class="btn btn-primary btn-lg" id="setting">显示首页</button>
 
-    <audio class="audio" src="img/wechat.mp3" muted=true></audio>
+            </p>
+            <br>
+            <div class="lead">
+                <select id="cur_peer_select" onchange="">
+                </select><br><br>
+                <video id="gum" width="480" playsinline autoplay muted src="fragment-0.mp4" controls></video>
+            </div>
+            <br />
+            <div class="jumbotron" id="save_as_div" style="z-index: 999; display: none"></div>
 
-    <div class="music-player">
-        <div class="music-player-btn"></div>
-        <div class="music-player-sketch">
-            <div class="music-player-name"></div>
-            <div class="music-player-author"></div>
+
+
+            <div id="debug_panel" style="display:unset">
+
+
+                <hr class="my-4">
+                <p class="lead">
+                    <button class="btn btn-primary btn-lg" id="show_debug">显示调试</button>
+                    <button class="btn btn-primary btn-lg" id="test">test</button>
+                    <button class="btn btn-primary btn-lg" onclick="clear_debug()">Clear</button>
+                </p>
+
+
+                <textarea id="my_id" rows="5 ">my_id</textarea>
+                <textarea id="debug" rows="5 "></textarea><br />
+            </div>
+
         </div>
-    </div>
+    </main>
 
-    <div class="shake-info"></div>
-
-<script src="js/index.js"></script>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">版权所有 &copy; 2023 我的网站</span>
+        </div>
+    </footer>
 </body>
 </html>
